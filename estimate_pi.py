@@ -21,7 +21,7 @@ def mc_loop(epsilon, delta):
     :return: number of point in the circle, total number of point
     """
     # number of point needed
-    k = math.ceil(4*math.log(2/delta)/epsilon**2)
+    k = math.ceil(4 * math.log(2 / delta) / epsilon ** 2)
     print(f"Going to generate {k} points...")
 
     # point in circle counter
@@ -35,7 +35,7 @@ def mc_loop(epsilon, delta):
 
         # completion bar (it does not print on some IDEs)
         if i % 1000000 == 0:
-            print(f" [ completed {(i/k*100): 2.2f}% ]", end='\r')
+            print(f" [ completed {(i / k * 100): 2.2f}% ]", end='\r')
 
     print(" [ completed 100.00% ] ")
     return count, k
@@ -58,10 +58,13 @@ def estimate_pi(digits: int, correctness: float):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
+    print("*** PI estimate ***")
+    dig = NUM_DEC_DIGITS
+    try:
         dig = int(sys.argv[1])
-    else:
-        dig = NUM_DEC_DIGITS
+    except(ValueError, IndexError):
+        print(f"Usage: {sys.argv[0]} <num-digit>\n")
+        print("Using default parameter")
 
     pi = estimate_pi(dig, CORRECTNESS)
     print(f"PI = {pi}")
