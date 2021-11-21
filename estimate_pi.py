@@ -9,7 +9,7 @@ import sys
 from sympy import N
 
 NUM_DEC_DIGITS = 2
-CORRECTNESS = 99.5
+CORRECTNESS = 95
 
 
 def mc_loop(epsilon, delta):
@@ -51,8 +51,10 @@ def estimate_pi(digits: int, correctness: float):
     """
     epsilon = (10 ** -digits) / 3
     delta = 1 - correctness / 100
+    print(f"We will find a ({epsilon: .4f}, {delta: .4f})-approximation")
     count, k = mc_loop(epsilon, delta)
-    return N(count / k * 4, digits + 1)
+    factor = 10 ** digits
+    return math.trunc((4 * count) / k * factor) / factor
 
 
 if __name__ == '__main__':
